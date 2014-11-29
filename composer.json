@@ -1,0 +1,12 @@
+{
+    "name": "4orever/ppc-auth",
+    "description": "Authentication module",
+    "minimum-stability": "dev",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Andrey Lysyuk",
+            "email": "lysyuk.a@gmail.com"
+        }
+    ]
+}
