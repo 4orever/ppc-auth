@@ -1,0 +1,51 @@
+    <?php echo $this->doctype(); ?>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <?php
+            echo $this->headTitle('PROM-PC v.2');
+            echo $this->headLink();
+            echo $this->headScript();
+        ?>
+
+        <style>
+
+            /* check combo */
+            .extex { border: 1px solid #333; padding: 10px; }
+            .x-combo-checker { margin-left: 1px; background-color: transparent; background-image: url("/extjs/4.2.1.883/resources/themes/images/default/grid/unchecked.gif"); background-position: -1px -1px; background-repeat: no-repeat; height: 14px; width: 14px; display: inline-block; }
+            .x-boundlist-selected .x-combo-checker { background-image: url("/extjs/4.2.1.883/resources/themes/images/default/grid/checked.gif"); }
+
+            .highlight * { font-style: italic; }
+            .darklight * { color: #ccc; }
+            .add-icon { background-image: url('icons/add.png'); width: 16px; height: 16px; cursor: pointer; }
+            .delete-icon { background-image: url('icons/delete.png'); width: 16px; height: 16px; cursor: pointer; }
+            .app-popup { background-color: white; border: 1px solid #CCC; }
+            .app-link { text-decoration: underline; color: #002a80; cursor: pointer; }
+
+            .switcher label { cursor: pointer; padding: 3px; }
+            .switcher label span.link { text-decoration: underline; color: #0066CC; }
+            .switcher .x-form-cb-checked label { background: #e8e8e8; text-decoration: none; color: black; }
+            .switcher input { display: none; }
+            .biradio-checked label {  background: #eee; color: #0066CC; }
+
+            table.product-list-standard { width: 100%; }
+            table.product-list-standard td.info { width: 100%; }
+            table.product-list-standard .price-for-order { padding: 2px 0 0 0; font-size: 12px; color: black; }
+            table.product-list-standard .product-container { position: relative; }
+            table.product-list-standard span.in-stock { position: absolute; left: 0px; top: 33px; background: url("/fileadmin/templates/images/tick.png") no-repeat 3px 2px; padding: 5px 0 5px 24px; }
+            table.product-list-standard span.not-in-stock { position: absolute; left: 0px; top: 33px; background: url("/fileadmin/templates/images/cross.png") no-repeat 0px 2px; padding: 5px 0 5px 24px; }
+            table.product-list-standard .price-default { display: inline; font-size: 12px; padding: 0 0 0 5px; color: black; background: #eee;}
+            table.product-list-standard .product-price { position: absolute; left: 150px; top: 33px; font-size: 18px; color: #72BF00; }
+            table.product-list-standard .product-short-description { margin: 48px 0 0 0; }
+
+        </style>
+
+    </head>
+    <body>
+        <?php
+        echo $this->content;
+        echo $this->inlineScript();
+        ?>
+    </body>
+    </html>
