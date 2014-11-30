@@ -27,8 +27,8 @@ class Module implements AutoloaderProviderInterface,
 
     }
 
-//    public function getAutoloaderConfig()
-//    {
+    public function getAutoloaderConfig()
+    {
 //        return array(
 //            'Zend\Loader\ClassMapAutoloader' => array(
 //                __DIR__ . '/autoload_classmap.php',
@@ -40,7 +40,7 @@ class Module implements AutoloaderProviderInterface,
 //                ),
 //            ),
 //        );
-//    }
+    }
 
     public function getConfig()
     {
