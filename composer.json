@@ -8,5 +8,13 @@
             "name": "Andrey Lysyuk",
             "email": "lysyuk.a@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4":{
+            "PpcAuth\\" : "src/PpcAuth/"
+        },
+        "classmap": [
+            "Module.php"
+        ]
+    }
 }
