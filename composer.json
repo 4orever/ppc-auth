@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4":{
-            "PpcAuth\\" : "src/PpcAuth/"
+            "PpcAuth\\" : "src/"
         },
         "classmap": [
             "Module.php"
