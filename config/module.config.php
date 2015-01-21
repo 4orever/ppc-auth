@@ -1,10 +1,10 @@
 <?php
-namespace Backend;
+namespace PpcAuth;
 
 return array(
     'PpcAuth' => [
         'auth_controllers' => [
-            'Backend\Controller\Index'
+            'PpcBackend\Controller\Index'
         ]
     ],
     'controllers' => array(
