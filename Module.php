@@ -92,7 +92,7 @@ class Module implements AutoloaderProviderInterface,
             if (!$auth->hasIdentity()) {
                 $e->getRouteMatch()
                     ->setParam('__NAMESPACE__', 'PpcAuth')
-                    ->setParam('controller', 'Controller\Index')
+                    ->setParam('controller', 'PpcAuth\Controller\Index')
                     ->setParam('action', 'login');
             }
         }
