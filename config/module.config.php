@@ -4,7 +4,8 @@ namespace PpcAuth;
 return array(
     'PpcAuth' => [
         'auth_controllers' => [
-            'PpcBackend\Controller\Index'
+            'PpcBackend\Controller\Index',
+            'kjsencha_direct'
         ]
     ],
     'controllers' => array(

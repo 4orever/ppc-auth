@@ -10,9 +10,9 @@
 namespace PpcAuth;
 
 use PpcAuth\Model\AuthStorage;
+use Zend\Db\Adapter\Adapter;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\ModuleManager;
-use Zend\Mvc\ModuleRouteListener;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Authentication\Storage;
 use Zend\Authentication\AuthenticationService;
@@ -56,26 +56,26 @@ class Module implements AutoloaderProviderInterface,
 //        $moduleRouteListener->attach($eventManager);
 //        $eventManager->getSharedManager()->attach('Backend\Controller\IndexController', MvcEvent::EVENT_DISPATCH,
 //            array($this, 'checkAuthenticated'));
-        $eventManager->attach('route', array($this, 'checkAuthenticated'));
+        $eventManager->attach(MvcEvent::EVENT_ROUTE, array($this, 'checkAuthenticated'));
     }
 
     public function getServiceConfig()
     {
         return array(
             'factories' => array(
-                'PpcAuth\Model\AuthStorage' => function ($sm) {
+                AuthStorage::class => function ($sm) {
                     return new AuthStorage('PpcAuth');
                 },
 
                 'AuthService' => function ($sm) {
 
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $dbAdapter = $sm->get(Adapter::class);
                     $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter,
                         'PpcAuthUser', 'username', 'password', 'MD5(?)');
 
                     $authService = new AuthenticationService();
                     $authService->setAdapter($dbTableAuthAdapter);
-                    $authService->setStorage($sm->get('PpcAuth\Model\AuthStorage'));
+                    $authService->setStorage($sm->get(AuthStorage::class));
 
                     return $authService;
                 },
@@ -87,6 +87,7 @@ class Module implements AutoloaderProviderInterface,
     public function checkAuthenticated(MvcEvent $e)
     {
         $serviceManager = $e->getApplication()->getServiceManager();
+        /** @var AuthenticationService $auth */
         $auth = $serviceManager->get('AuthService');
         if (!$this->isOpenRequest($e)) {
             if (!$auth->hasIdentity()) {
@@ -94,6 +95,10 @@ class Module implements AutoloaderProviderInterface,
                     ->setParam('__NAMESPACE__', 'PpcAuth')
                     ->setParam('controller', 'PpcAuth\Controller\Index')
                     ->setParam('action', 'login');
+            } else {
+                $identity = $auth->getIdentity();
+                file_put_contents('data/idenity', json_encode(compact('identity')));
+                $e->getApplication()->getEventManager()->trigger('auth', $this, compact('identity'));
             }
         }
     }
@@ -102,6 +107,7 @@ class Module implements AutoloaderProviderInterface,
     {
         $config = $this->getConfig();
         $controller = $e->getRouteMatch()->getParam('controller');
+        file_put_contents('data/last_controller', $controller);
         if (!in_array($controller, $config['PpcAuth']['auth_controllers'])) {
             return true;
         }
