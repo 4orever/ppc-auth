@@ -4,8 +4,10 @@ namespace PpcAuth;
 return array(
     'PpcAuth' => [
         'auth_controllers' => [
-            'PpcBackend\Controller\Index',
-            'kjsencha_direct'
+            'PpcBackend\Controller\Index'
+            // Перестает работать и фронтенд
+//            ,
+//            'kjsencha_direct'
         ]
     ],
     'controllers' => array(
