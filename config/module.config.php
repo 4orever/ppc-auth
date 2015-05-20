@@ -46,8 +46,6 @@ return array(
         ),
     ),
     'view_manager' => array(
-        'display_not_found_reason' => true,
-        'display_exceptions'       => true,
         'template_path_stack' => array(
             'ppc-auth' => __DIR__ . '/../view',
         ),
