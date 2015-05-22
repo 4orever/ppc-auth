@@ -96,8 +96,6 @@ class Module implements AutoloaderProviderInterface,
                     ->setParam('controller', 'PpcAuth\Controller\Index')
                     ->setParam('action', 'login');
             } else {
-                $identity = $auth->getIdentity();
-                file_put_contents('data/idenity', json_encode(compact('identity')));
                 $e->getApplication()->getEventManager()->trigger('auth', $this, compact('identity'));
             }
         }
@@ -107,7 +105,6 @@ class Module implements AutoloaderProviderInterface,
     {
         $config = $this->getConfig();
         $controller = $e->getRouteMatch()->getParam('controller');
-        file_put_contents('data/last_controller', $controller);
         if (!in_array($controller, $config['PpcAuth']['auth_controllers'])) {
             return true;
         }
