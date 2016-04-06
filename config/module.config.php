@@ -1,6 +1,10 @@
 <?php
 namespace PpcAuth;
 
+use PpcAuth\Controller\IndexController;
+use PpcAuth\Model\AuthStorage;
+use Zend\Mvc\Controller\ControllerManager;
+
 return array(
     'PpcAuth' => [
         'auth_controllers' => [
@@ -12,8 +16,15 @@ return array(
     ],
     'controllers' => array(
         'invokables' => array(
-            'PpcAuth\Controller\Index' => 'PpcAuth\Controller\IndexController',
+//            'PpcAuth\Controller\Index' => 'PpcAuth\Controller\IndexController',
         ),
+        'factories' => function(ControllerManager $cm) {
+            $sl = $cm->getServiceLocator();
+            $storage = $sl->get(AuthStorage::class);
+            $authService = $sl->get('AuthService');
+            $controller = new IndexController($storage, $authService);
+            return $controller;
+        }
     ),
     'router' => array(
         'routes' => array(
