@@ -16,40 +16,41 @@ return array(
     ],
     'controllers' => array(
         'invokables' => array(
-//            'PpcAuth\Controller\Index' => 'PpcAuth\Controller\IndexController',
+            //            'PpcAuth\Controller\Index' => 'PpcAuth\Controller\IndexController',
         ),
-        'factories' => function(ControllerManager $cm) {
-            $sl = $cm->getServiceLocator();
-            $storage = $sl->get(AuthStorage::class);
-            $authService = $sl->get('AuthService');
-            $controller = new IndexController($storage, $authService);
-            return $controller;
-        }
+        'factories' => [
+            'PpcAuth\Controller\Index' => function (ControllerManager $cm) {
+                $sl = $cm->getServiceLocator();
+                $storage = $sl->get(AuthStorage::class);
+                $authService = $sl->get('AuthService');
+                $controller = new IndexController($storage, $authService);
+                return $controller;
+            }
+        ]
     ),
     'router' => array(
         'routes' => array(
             'login' => array(
-                'type'    => 'Literal',
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/auth',
+                    'route' => '/auth',
                     'defaults' => array(
                         '__NAMESPACE__' => 'PpcAuth\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'login',
+                        'controller' => 'Index',
+                        'action' => 'login',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'process' => array(
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => array(
-                            'route'    => '/[:action]',
+                            'route' => '/[:action]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
-                            'defaults' => array(
-                            ),
+                            'defaults' => array(),
                         ),
                     ),
                 ),
