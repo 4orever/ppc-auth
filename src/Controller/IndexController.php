@@ -19,23 +19,25 @@ class IndexController extends AbstractActionController {
     protected $storage;
     protected $authService;
 
+    /**
+     * IndexController constructor.
+     * @param $storage
+     * @param $authService
+     */
+    public function __construct($storage, $authService)
+    {
+        $this->storage = $storage;
+        $this->authService = $authService;
+    }
+
+
     public function getAuthService()
     {
-        if (! $this->authService) {
-            $this->authService = $this->getServiceLocator()
-                ->get('AuthService');
-        }
-
         return $this->authService;
     }
 
     public function getSessionStorage()
     {
-        if (! $this->storage) {
-            $this->storage = $this->getServiceLocator()
-                ->get('PpcAuth\Model\AuthStorage');
-        }
-
         return $this->storage;
     }
 
