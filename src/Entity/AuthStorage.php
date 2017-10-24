@@ -1,5 +1,5 @@
 <?php
-namespace PpcAuth\Model;
+namespace PpcAuth\Entity;
 
 use Zend\Authentication\Storage;
 

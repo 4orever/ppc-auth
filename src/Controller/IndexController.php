@@ -9,7 +9,7 @@
 namespace PpcAuth\Controller;
 
 
-use PpcAuth\Model\User;
+use PpcAuth\Entity\User;
 use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -30,28 +30,6 @@ class IndexController extends AbstractActionController {
         $this->authService = $authService;
     }
 
-
-    public function getAuthService()
-    {
-        return $this->authService;
-    }
-
-    public function getSessionStorage()
-    {
-        return $this->storage;
-    }
-
-    public function getForm()
-    {
-        if (! $this->form) {
-            $user       = new User();
-            $builder    = new AnnotationBuilder();
-            $this->form = $builder->createForm($user);
-        }
-
-        return $this->form;
-    }
-
     public function loginAction()
     {
         //if already login, redirect to success page
@@ -65,6 +43,22 @@ class IndexController extends AbstractActionController {
             'form'      => $form,
             'messages'  => $this->flashmessenger()->getMessages()
         );
+    }
+
+    public function getAuthService()
+    {
+        return $this->authService;
+    }
+
+    public function getForm()
+    {
+        if (!$this->form) {
+            $user = new User();
+            $builder = new AnnotationBuilder();
+            $this->form = $builder->createForm($user);
+        }
+
+        return $this->form;
     }
 
     public function authenticateAction()
@@ -104,6 +98,11 @@ class IndexController extends AbstractActionController {
         }
 
         return $this->redirect()->toRoute($redirect);
+    }
+
+    public function getSessionStorage()
+    {
+        return $this->storage;
     }
 
     public function logoutAction()

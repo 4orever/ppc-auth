@@ -9,12 +9,11 @@
 
 namespace PpcAuth;
 
-use PpcAuth\Model\AuthStorage;
+use PpcAuth\Entity\AuthStorage;
 use Zend\Db\Adapter\Adapter;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\ModuleManager;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\Authentication\Storage;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Mvc\MvcEvent;
@@ -40,11 +39,6 @@ class Module implements AutoloaderProviderInterface,
 //                ),
 //            ),
 //        );
-    }
-
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
     }
 
     public function onBootstrap(MvcEvent $e)
@@ -83,7 +77,6 @@ class Module implements AutoloaderProviderInterface,
         );
     }
 
-
     public function checkAuthenticated(MvcEvent $e)
     {
         $serviceManager = $e->getApplication()->getServiceManager();
@@ -110,5 +103,10 @@ class Module implements AutoloaderProviderInterface,
         }
 
         return false;
+    }
+
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php';
     }
 }

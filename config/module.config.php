@@ -2,7 +2,7 @@
 namespace PpcAuth;
 
 use PpcAuth\Controller\IndexController;
-use PpcAuth\Model\AuthStorage;
+use PpcAuth\Entity\AuthStorage;
 use Zend\Mvc\Controller\ControllerManager;
 
 return array(
@@ -61,5 +61,19 @@ return array(
         'template_path_stack' => array(
             'ppc-auth' => __DIR__ . '/../view',
         ),
+    ),
+    'doctrine' => array(
+        'driver' => array(
+            __NAMESPACE__ . '_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'memcached',
+                'paths' => array(__DIR__ . '/../src/Entity')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                )
+            )
+        )
     ),
 );
