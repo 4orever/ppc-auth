@@ -14,6 +14,14 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends Model
 {
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Annotation\Exclude()
+     */
+    public $id;
+
+    /**
      * @Annotation\Type("Zend\Form\Element\Text")
      * @Annotation\Required({"required":"true" })
      * @Annotation\Filter({"name":"StripTags"})
@@ -32,6 +40,7 @@ class User extends Model
     public $password;
 
     /**
+     * @Annotation\Exclude()
      * @ORM\Column(type="boolean")
      */
     public $isFreelancer = false;
