@@ -6,7 +6,7 @@ use Zend\Form\Annotation;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @Annotation\Hydrator("Zend\Stdlib\Hydrator\ObjectProperty")
+ * @Annotation\Hydrator("Zend\Hydrator\ObjectProperty")
  * @Annotation\Name("User")
  * @ORM\Entity
  * @ORM\Table(name="PpcAuthUser")

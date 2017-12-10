@@ -41,7 +41,7 @@ class IndexController extends AbstractActionController {
 
         return array(
             'form'      => $form,
-            'messages'  => $this->flashmessenger()->getMessages()
+//            'messages'  => $this->flashmessenger()->getMessages()
         );
     }
 
@@ -77,11 +77,11 @@ class IndexController extends AbstractActionController {
                     ->setCredential($request->getPost('password'));
 
                 $result = $this->getAuthService()->authenticate();
-                foreach($result->getMessages() as $message)
-                {
-                    //save message temporary into flashmessenger
-                    $this->flashmessenger()->addMessage($message);
-                }
+//                foreach($result->getMessages() as $message)
+//                {
+//                    //save message temporary into flashmessenger
+//                    $this->flashmessenger()->addMessage($message);
+//                }
 
                 if ($result->isValid()) {
                     $redirect = 'backend';
@@ -110,7 +110,7 @@ class IndexController extends AbstractActionController {
         $this->getSessionStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
 
-        $this->flashmessenger()->addMessage("You've been logged out");
+//        $this->flashmessenger()->addMessage("You've been logged out");
         return $this->redirect()->toRoute('login');
     }
 

@@ -19,10 +19,9 @@ return array(
             //            'PpcAuth\Controller\Index' => 'PpcAuth\Controller\IndexController',
         ),
         'factories' => [
-            'PpcAuth\Controller\Index' => function (ControllerManager $cm) {
-                $sl = $cm->getServiceLocator();
-                $storage = $sl->get(AuthStorage::class);
-                $authService = $sl->get('AuthService');
+            'PpcAuth\Controller\Index' => function ($container) {
+                $storage = $container->get(AuthStorage::class);
+                $authService = $container->get('AuthService');
                 $controller = new IndexController($storage, $authService);
                 return $controller;
             }
